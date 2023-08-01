@@ -21,12 +21,12 @@ bot.on('message', function (event) {
   });
 });
 
-// bot.listen('/linewebhook', 80);
+bot.listen('/linewebhook', 80);
 
 const app = express();
 const linebotParser = bot.parser();
 app.post('/linewebhook', linebotParser);
 
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 3000;
 
 app.listen(port, ()=> console.log(`Listening on http://localhost:${port}`));
