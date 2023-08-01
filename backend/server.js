@@ -27,6 +27,6 @@ const app = express();
 const linebotParser = bot.parser();
 app.post('/linewebhook', linebotParser);
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 80;
 
 app.listen(port, ()=> console.log(`Listening on http://localhost:${port}`));
