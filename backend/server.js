@@ -21,7 +21,7 @@ bot.on('message', function (event) {
   });
 });
 
-bot.listen('/linewebhook', 80);
+// bot.listen('/linewebhook', 80);
 
 const app = express();
 const linebotParser = bot.parser();
