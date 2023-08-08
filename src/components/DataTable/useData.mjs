@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const client = new WebSocket('ws://localhost');
+const client = new WebSocket("wss://" + location.host + "/");
 
 client.onopen = () => {
   console.log('open connection')
