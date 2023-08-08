@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Table, ConfigProvider, theme, Button, message, Row, Col } from 'antd';
-import Page from './Page';
-import List from './List';
-import Modal from './Modal';
-import Upload from './Upload';
-import useData from './useData';
+import Page from './Page.mjs';
+import List from './List.mjs';
+import Modal from './Modal.mjs';
+import Upload from './Upload.mjs';
+import useData from './useData.mjs';
 import { DeleteOutlined, PlusCircleOutlined  } from '@ant-design/icons';
 
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import DataTable from './components/DataTable';
-import reportWebVitals from './reportWebVitals';
+import DataTable from './components/DataTable/index.mjs';
+import reportWebVitals from './reportWebVitals.mjs';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

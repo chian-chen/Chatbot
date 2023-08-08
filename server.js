@@ -3,20 +3,29 @@ import express from 'express';
 import http from 'http';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import path from "path";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
-import db from './mongo.js';
-import Template from './models/templateOne.js';
-import {sendData, initData} from './wssConnect.js';
-import bot from './line/line.js';
+import db from './backend/mongo.js';
+import Template from './backend/models/templateOne.js';
+import {sendData, initData} from './backend/wssConnect.js';
+import bot from './backend/line/line.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const port = process.env.PORT || 4000;
 
 
 const app = express();
 app.use(cors())
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, "build")));
+app.get("/*", function (_, res) {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
-const port = process.env.PORT || 4000;
 
 
 //line bot for the server
