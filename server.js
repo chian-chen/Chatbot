@@ -10,7 +10,7 @@ import { fileURLToPath } from "url";
 import db from './backend/mongo.js';
 import Template from './backend/models/templateOne.js';
 import {sendData, initData} from './backend/wssConnect.js';
-import bot from './backend/line/line.js';
+import {middleware, handleEvent} from './backend/line/line.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const port = process.env.PORT || 4000;
@@ -27,18 +27,17 @@ app.get("/*", function (_, res) {
 const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
 
+//line bot
+app.post('/linebot', middleware, (req, res) => {
+  Promise
+    .all(req.body.events.map(handleEvent))
+    .then((result) => console.log(res.json(result)))
+    .catch((err) => {
+      console.error(err);
+      res.status(500).end();
+    });
+});
 
-//line bot for the server
-
-const linebotParser = bot.parser();
-app.post('/linewebhook', linebotParser);
-
-const broadcastMessage = (data, status) => {
-  wss.clients.forEach((client) => {
-    sendData(data, client);
-    sendStatus(status, client);
-  });
-};
 
 const broadcast = (status) => {
     Template.find().sort({ created_at: -1 })
@@ -103,6 +102,6 @@ db.once('open', () => {
       };
   });
   server.listen(port, () => {
-    console.log(`Listening on http://localhost:${port}`)
+    console.log(`Listening on https://localhost:${port}`)
 });
 });

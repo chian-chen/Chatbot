@@ -1,21 +1,26 @@
-import linebot from 'linebot';
+import line from '@line/bot-sdk';
 import dotenv from 'dotenv-defaults';
 
 dotenv.config();
 
-const bot = linebot({
-    channelId: process.env.LINE_CHANNEL_ID,
-    channelSecret: process.env.LINE_CHANNEL_SECRET,
-    channelAccessToken: process.env.LINE_CHANNEL_ACCESS_TOKEN
-});
-  
-  
-bot.on('message', function (event) {
-  event.reply(event.message.text).then(function (data) {
-    console.log("success!");
-  }).catch(function (error) {
-    console.log("Error!");
-  });
-});
+const config = {
+  channelAccessToken: process.env.LINE_CHANNEL_ACCESS_TOKEN,
+  channelSecret: process.env.LINE_CHANNEL_SECRET,
+};
+const client = new line.Client(config);
+const middleware = line.middleware(config);
 
-export default bot;
+const handleEvent = (event) => {
+  if (event.type !== 'message' || event.message.type !== 'text') {
+    // ignore non-text-message event
+    return Promise.resolve(null);
+  }
+
+  // create a echoing text message
+  const echo = { type: 'text', text: event.message.text };
+
+  // use reply API
+  return client.replyMessage(event.replyToken, echo);
+};
+
+export {middleware, handleEvent};
