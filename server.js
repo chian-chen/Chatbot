@@ -31,7 +31,7 @@ const wss = new WebSocketServer({ server });
 app.post('/linebot', middleware, (req, res) => {
   Promise
     .all(req.body.events.map(handleEvent))
-    .then((result) => console.log(res.json(result)))
+    .then((result) => res.json(result))
     .catch((err) => {
       console.error(err);
       res.status(500).end();
