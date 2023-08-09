@@ -1,7 +1,7 @@
 import { WebSocketServer } from 'ws';
 import express from 'express';
 import http from 'http';
-import bodyParser from 'body-parser';
+// import bodyParser from 'body-parser';
 import cors from 'cors';
 import path from "path";
 import { dirname } from "path";
@@ -17,15 +17,7 @@ const port = process.env.PORT || 4000;
 
 
 const app = express();
-app.use(cors())
-app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "build")));
-app.get("/*", function (_, res) {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
-
-const server = http.createServer(app);
-const wss = new WebSocketServer({ server });
+app.use(cors());
 
 //line bot
 app.post('/linebot', middleware, (req, res) => {
@@ -37,6 +29,21 @@ app.post('/linebot', middleware, (req, res) => {
       res.status(500).end();
     });
 });
+
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, "build")));
+app.get('/test', (_, res)=>{
+  res.send("TEST get request!");
+});
+app.get("/*", function (_, res) {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
+
+
+
+const server = http.createServer(app);
+const wss = new WebSocketServer({ server });
 
 
 const broadcast = (status) => {
@@ -102,6 +109,6 @@ db.once('open', () => {
       };
   });
   server.listen(port, () => {
-    console.log(`Listening on https://localhost:${port}`)
+    console.log(`Listening on http://localhost:${port}`)
 });
 });
