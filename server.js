@@ -30,7 +30,7 @@ app.post('/linebot', middleware, (req, res) => {
     });
 });
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "build")));
 app.get('/test', (_, res)=>{
   res.send("TEST get request!");

@@ -4,7 +4,7 @@ const url = new URL(window.location.href);
 const client = new WebSocket(url.href.replace("http", "ws"));
 
 client.onopen = () => {
-  console.log('open connection')
+  console.log('open connection');
 }
 
 
@@ -55,7 +55,7 @@ const useData = () => {
 
     const deleteMany = (data) => {
         sendToBackend(["Delete-Many", data]);
-    }
+    };
 
     const deleteData = (data) => {
         sendToBackend(["Delete-Data", data]);
