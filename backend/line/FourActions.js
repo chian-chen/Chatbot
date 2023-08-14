@@ -20,14 +20,14 @@ const FourActions = (acts) => {
                   "contents": [
                     {
                       "type": "text",
-                      "text": acts[0]['act1'],
+                      "text": acts[0],
                       "size": "md",
                       "align": "center",
                       "wrap": true,
                       "action": {
                         "type": "message",
-                        "label": acts[0]['act1'],
-                        "text": acts[0]['act1']
+                        "label": acts[0],
+                        "text": acts[0]
                       },
                       "margin": "none",
                       "color": "#428f96"
@@ -51,14 +51,14 @@ const FourActions = (acts) => {
                   "contents": [
                     {
                       "type": "text",
-                      "text": acts[0]['act2'],
+                      "text": acts[1],
                       "size": "md",
                       "align": "center",
                       "wrap": true,
                       "action": {
                         "type": "message",
-                        "label": acts[0]['act2'],
-                        "text": acts[0]['act2']
+                        "label": acts[1],
+                        "text": acts[1]
                       },
                       "margin": "none",
                       "color": "#428f96"
@@ -96,14 +96,14 @@ const FourActions = (acts) => {
                   "contents": [
                     {
                       "type": "text",
-                      "text": acts[0]['act3'],
+                      "text": acts[2],
                       "size": "md",
                       "align": "center",
                       "wrap": true,
                       "action": {
                         "type": "message",
-                        "label": acts[0]['act3'],
-                        "text": acts[0]['act3'],
+                        "label": acts[2],
+                        "text": acts[2],
                       },
                       "margin": "none",
                       "color": "#428f96"
@@ -127,14 +127,14 @@ const FourActions = (acts) => {
                   "contents": [
                     {
                       "type": "text",
-                      "text": acts[0]['act4'],
+                      "text": acts[3],
                       "size": "md",
                       "align": "center",
                       "wrap": true,
                       "action": {
                         "type": "message",
-                        "label": acts[0]['act4'],
-                        "text": acts[0]['act4']
+                        "label": acts[3],
+                        "text": acts[3]
                       },
                       "margin": "none",
                       "color": "#428f96"
