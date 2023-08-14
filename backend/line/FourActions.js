@@ -2,6 +2,9 @@
 const FourActions = (acts) => {
 
     return {
+      "type": "flex",
+      "altText": "This is a Flex Message",
+      "contents": {
         "type": "carousel",
         "contents": [
           {
@@ -17,14 +20,14 @@ const FourActions = (acts) => {
                   "contents": [
                     {
                       "type": "text",
-                      "text": acts[0],
+                      "text": acts[0]['act1'],
                       "size": "md",
                       "align": "center",
                       "wrap": true,
                       "action": {
                         "type": "message",
-                        "label": acts[0],
-                        "text": acts[0],
+                        "label": acts[0]['act1'],
+                        "text": acts[0]['act1']
                       },
                       "margin": "none",
                       "color": "#428f96"
@@ -48,14 +51,14 @@ const FourActions = (acts) => {
                   "contents": [
                     {
                       "type": "text",
-                      "text": acts[1],
+                      "text": acts[0]['act2'],
                       "size": "md",
                       "align": "center",
                       "wrap": true,
                       "action": {
                         "type": "message",
-                        "label": acts[1],
-                        "text": acts[1],
+                        "label": acts[0]['act2'],
+                        "text": acts[0]['act2']
                       },
                       "margin": "none",
                       "color": "#428f96"
@@ -93,14 +96,14 @@ const FourActions = (acts) => {
                   "contents": [
                     {
                       "type": "text",
-                      "text": acts[2],
+                      "text": acts[0]['act3'],
                       "size": "md",
                       "align": "center",
                       "wrap": true,
                       "action": {
                         "type": "message",
-                        "label": acts[2],
-                        "text": acts[2],
+                        "label": acts[0]['act3'],
+                        "text": acts[0]['act3'],
                       },
                       "margin": "none",
                       "color": "#428f96"
@@ -124,14 +127,14 @@ const FourActions = (acts) => {
                   "contents": [
                     {
                       "type": "text",
-                      "text": acts[3],
+                      "text": acts[0]['act4'],
                       "size": "md",
                       "align": "center",
                       "wrap": true,
                       "action": {
                         "type": "message",
-                        "label": acts[3],
-                        "text": acts[3],
+                        "label": acts[0]['act4'],
+                        "text": acts[0]['act4']
                       },
                       "margin": "none",
                       "color": "#428f96"
@@ -158,6 +161,7 @@ const FourActions = (acts) => {
           }
         ]
       }
+    };
 };
 
 export default FourActions;
