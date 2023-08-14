@@ -97,7 +97,7 @@ const App = ()=>{
           expandable={{
           expandedRowRender: (record) => (
             // <Card datas={record}/>
-            <List datas={record}/>
+                <List datas={record}/>
             ),
             rowExpandable: (record) => record.prompt !== 'No Data',
           }}/>
