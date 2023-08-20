@@ -32,10 +32,7 @@ app.post('/linebot', middleware, (req, res) => {
 
 // app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "build")));
-app.get('/test', (_, res)=>{
-  res.send("TEST get request!");
-});
-app.get("/*", function (_, res) {
+app.get("/*", (_, res) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
@@ -103,6 +100,10 @@ db.once('open', () => {
                     msg: `Delete ${payload.length} datas!"`
                   });
                   break;
+              }
+              case 'Message-In': {
+                
+                break;
               }
               default: break;
           };

@@ -41,7 +41,12 @@ const MyForm = ({saveData, setIsModalVisible}) => {
     onFinish={onFinish}
     >
       {datas.map((data)=> (
-      <Form.Item label={data} name={data === 'class'? 'cls': data} key={data}>
+      <Form.Item label={data} name={data === 'class'? 'cls': data} key={data} rules={ data === 'prompt'? [
+        {
+          required: true,
+          message: `Please input ${data}!`,
+        }
+        ]: ''}>
         <Input placeholder={`input ${data}`}/>
       </Form.Item>))}
       <Form.Item wrapperCol={{ align:'right' }}>

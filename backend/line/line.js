@@ -1,6 +1,6 @@
 import line from '@line/bot-sdk';
 import dotenv from 'dotenv-defaults';
-import FourActions from './FourActions.js';
+import HandleAction from './Actions.js';
 import Template from '../models/templateOne.js';
 
 
@@ -33,17 +33,31 @@ const handleEvent = async (event) => {
   let acts = [];
 
   for(let i = 1; i < 5; i++){
-    if(datas[0][`mes${i}`] !== '')
-      messages.push({
-        'type': 'text', 
-        'text': datas[0][`mes${i}`]
-      });
-    if(datas[0][`act${i}`] !== '')
-      acts.push(datas[0][`act${i}`]);
+    const mes = datas[0][`mes${i}`];
+    const act = datas[0][`act${i}`];
+
+    if(mes !== ''){
+      if(mes.startsWith('https') && (mes.endsWith('.jpg') || mes.endsWith('.png'))){
+        messages.push({
+          "type": "image",
+          "originalContentUrl": mes,
+          "previewImageUrl": mes
+        });
+      }
+      else{
+        messages.push({
+          "type": "text", 
+          "text": mes
+        });
+      }
+    }
+    if(act !== '')
+      acts.push(act);
   }
-  if(acts.length === 4)
-    messages.push(FourActions(acts));
-  
+
+  if(acts.length !== 0)
+    messages.push(HandleAction(acts));
+
   // use reply API
   return client.replyMessage(event.replyToken, messages);
 };

@@ -1,0 +1,50 @@
+{
+  "type": "carousel",
+  "contents": [
+    {
+      "type": "bubble",
+      "size": "mega",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "action1",
+                "size": "md",
+                "align": "center",
+                "wrap": true,
+                "action": {
+                  "type": "message",
+                  "label": "action1",
+                  "text": "action1"
+                },
+                "margin": "none",
+                "color": "#428f96"
+              }
+            ],
+            "spacing": "none",
+            "margin": "none",
+            "cornerRadius": "md",
+            "borderWidth": "none",
+            "backgroundColor": "#ffffff",
+            "paddingAll": "sm",
+            "offsetTop": "sm"
+          }
+        ],
+        "margin": "none",
+        "spacing": "none",
+        "borderWidth": "none",
+        "cornerRadius": "none",
+        "paddingAll": "xl",
+        "paddingBottom": "xxl",
+        "paddingTop": "lg",
+        "backgroundColor": "#eeeeee"
+      }
+    }
+  ]
+}

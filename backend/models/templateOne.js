@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { randomUUID } from 'crypto';
 
 const Schema = mongoose.Schema;
 // Creating a schema, sort of like working with an ORM
@@ -11,11 +12,12 @@ const TemplateSchema = new Schema({
   key: {
     type: String,
     required: [true, 'key field is required.'],
-    unique: [true, 'key field should be unique']
+    unique: [true, 'key field should be unique'],
+    default: () => randomUUID()
   },
   cls: {
     type: Number,
-    default: 0,
+    default: -1,
     // required: [false, 'class field is not required.']
   },
   mes1: {
