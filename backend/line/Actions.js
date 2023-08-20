@@ -1,7 +1,7 @@
 
 
 const HandleAction = (acts) => {
-    len = acts.length;
+    const len = acts.length;
     if(len === 1)
       return OneAction(acts);
     if(len === 2)
