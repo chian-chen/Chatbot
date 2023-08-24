@@ -1,9 +1,8 @@
 import { useState } from "react";
 
-// const url = new URL(window.location.href);
-// const client = new WebSocket(url.href.replace("http", "ws"));
-const client = new WebSocket('ws://localhost:4500');
-
+const url = new URL(window.location.href);
+const client = new WebSocket(url.href.replace("http", "ws"));
+// const client = new WebSocket('ws://localhost:4500');
 
 client.onopen = () => {
   console.log('open connection');
@@ -20,7 +19,7 @@ const useData = () => {
         const [task, payload] = JSON.parse(data);  
 
         switch (task) {
-          case "init": {
+          case "init-data": {
             setTableDatas(payload);
             break;
         }

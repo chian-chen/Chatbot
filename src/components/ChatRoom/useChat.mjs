@@ -1,6 +1,8 @@
 import { useState } from "react";
 
-const client = new WebSocket('ws://localhost:4000');
+const url = new URL(window.location.href);
+const client = new WebSocket(url.href.replace("http", "ws"));
+// const client = new WebSocket('ws://localhost:4500');
 
 client.onopen = () => {
   console.log('open connection')
@@ -21,7 +23,7 @@ const useChat = () => {
       case "status": {
         setStatus(payload); break;
     }
-      case "init": {
+      case "init-mess": {
         setMessages(() => payload);
         break;
     }

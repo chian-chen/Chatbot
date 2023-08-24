@@ -1,16 +1,12 @@
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
-
+// Creating a schema, sort of like working with an ORM
 const MessageSchema = new Schema({
-  user: {
+  name: {
     type: String,
     required: [true, 'Name field is required.'],
-  },
-  from: {
-    type: String,
-    required: [true, 'Name field is required.'],
-    default: 'user' // two options, user or bot
+    default: 'user'
   },
   body: {
     type: mongoose.Mixed,
@@ -18,8 +14,10 @@ const MessageSchema = new Schema({
   }
 });
 
+// Creating a table within database with the defined schema
 
 const Message = mongoose.model('message', MessageSchema);
 
+// Exporting table for querying and mutating
 
 export default Message;

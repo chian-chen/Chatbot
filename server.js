@@ -9,7 +9,8 @@ import { fileURLToPath } from "url";
 
 import db from './backend/mongo.js';
 import Template from './backend/models/templateOne.js';
-import {sendData, initData} from './backend/wss-Data.js';
+import Message from './backend/models/message.js';
+import {sendData, initData, sendStatus, initMess} from './backend/wssConnect.js';
 import {middleware, handleEvent} from './backend/line/line.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -53,9 +54,17 @@ const broadcast = (status) => {
     }).catch((e)=>console.log(e));
 };
 
+const broadcastMessage = (data, status) => {
+  wss.clients.forEach((client) => {
+    sendData(data, client);
+    sendStatus(status, client);
+  });
+};
+
 db.once('open', () => {
   wss.on('connection', (ws) => {
       initData(ws);
+      initMess(ws);
       ws.onmessage = async (byteString) => {
           const {data} = byteString;
           const [task, payload] = JSON.parse(data);
@@ -102,13 +111,46 @@ db.once('open', () => {
                   break;
               }
               case 'input': {
-                
-                break;
-              }
-              case 'clear':{
-
-                break;
-              }
+                const { name, body } = payload;
+                    const message = new Message({ name, body });
+                    await message.save().catch((e)=>Error("Message DB save error: " + e));
+                    const datas = await Template.find({prompt: body});
+                    
+                    if(datas === undefined || datas === [] || typeof datas[0] !== 'object'){
+                        const response = new Message({ 'name':'bot', 'body': 'prompt not exist' });
+                        await response.save().catch((e)=>Error("Message DB save error: " + e));
+                    }
+                    else{
+                        let acts = [];
+                        for(let i = 1; i < 5; i++){
+                            if(datas[0][`mes${i}`] !== ''){
+                                const response = new Message({ 'name':'bot', 'body': datas[0][`mes${i}`] });
+                                await response.save().catch((e)=>Error("Message DB save error: " + e));
+                            }
+                            if(datas[0][`act${i}`] !== '')
+                                acts.push(datas[0][`act${i}`]);
+                        }
+                        if(acts.length !== 0){
+                            const response = new Message({ 'name':'bot', 'body': acts });
+                            await response.save().catch((e)=>Error("Message DB save error: " + e));
+                        }
+                    }
+                    const messages = await Message.find().sort({ created_at: -1 }).limit(100).
+                        catch(e=>console.log(e));
+                    broadcastMessage(['output', messages],{
+                        type: 'success',
+                        msg: 'Message sent.'
+                    });
+                    break;
+                }
+              case 'clear': {
+                  await Message.deleteMany({});
+                  broadcastMessage(['cleared'],{
+                      type: 'info',
+                      msg: 'Message cache cleared.'
+                  });
+                  break;
+               }
               default: break;
           };
       };
