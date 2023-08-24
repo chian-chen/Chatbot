@@ -59,17 +59,9 @@ const handleEvent = async (event) => {
     messages.push(HandleAction(acts));
 
   // use reply API
+  await new Promise(resolve => setTimeout(resolve, 1000));
   return client.replyMessage(event.replyToken, messages);
 };
 
 
 export {middleware, handleEvent};
-
-
-// const replyText = (token, texts) => {
-//   texts = Array.isArray(texts) ? texts : [texts];
-//   return client.replyMessage(
-//     token,
-//     texts.map((text) => ({ type: 'text', text }))
-//   );
-// };

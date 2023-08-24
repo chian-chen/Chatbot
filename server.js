@@ -9,7 +9,7 @@ import { fileURLToPath } from "url";
 
 import db from './backend/mongo.js';
 import Template from './backend/models/templateOne.js';
-import {sendData, initData} from './backend/wssConnect.js';
+import {sendData, initData} from './backend/wss-Data.js';
 import {middleware, handleEvent} from './backend/line/line.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -101,8 +101,12 @@ db.once('open', () => {
                   });
                   break;
               }
-              case 'Message-In': {
+              case 'input': {
                 
+                break;
+              }
+              case 'clear':{
+
                 break;
               }
               default: break;

@@ -1,0 +1,51 @@
+.App {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 35%;
+    margin: auto;
+  }
+  
+  .App-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .App-title h1 {
+    margin: 0;
+    margin-right: 20px;
+    font-size: 3em;
+    color:aliceblue;
+  }
+  
+  .App-messages {
+    width: 100%;
+    height: 65%;
+    color:aliceblue;
+    background: #666666;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;
+    overflow: scroll;
+  }
+  
+  .App-message{
+    background: #888888;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    width: max-content;
+    font-size: 18px;
+  }
+
+  .Action{
+    background: #888888;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+    font-size: 18px;
+    /* margin-left: 50px; */
+  }

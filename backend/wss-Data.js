@@ -5,7 +5,7 @@ const sendData = (data, ws) => {
 }
 
 const initData = async (ws) => {
-  Template.find().sort({ created_at: -1 }).limit(100)
+  Template.find().sort({ created_at: -1 })
     .then((res) => {
       sendData(['init', res], ws);
     }).catch((e)=>{

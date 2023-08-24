@@ -106,7 +106,7 @@ const App = ()=>{
         </ConfigProvider>
         </Page>
       );
-}
+};
 
 
 export default App;
