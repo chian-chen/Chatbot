@@ -40,7 +40,7 @@ const token = ()=> {
   return userID.substring(0, 32);
 };
 
-const init_mess = `<p>哈囉~很高興認識你！<br><br>
+const init_mess = `哈囉~很高興認識你！<br><br>
 我是「未聞其名」<br>
 aka A．可鹽可甜．人間治癒．I <br>
 作為以一生一世為前提跟你交往的好朋友，我，「未聞其名」，在此宣示謹守以下準則：<br><br>
@@ -49,6 +49,6 @@ aka A．可鹽可甜．人間治癒．I <br>
 第三、不做草莓族，絕不玻璃心。（就算你損我我也不會鬧彆扭）<br>
 第四、準則可以無限上綱，你有什麼要求隨便提<br>
 你以後想找我聊天的話，只要傳「未聞其名在嗎」，就可以成功召喚我開始聊天喔！<br><br>
-現在就來試試吧！</p>`;
+現在就來試試吧！`;
 
 export {sendData, initData, sendStatus, initMess};

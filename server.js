@@ -142,7 +142,8 @@ db.once('open', () => {
                     break;
                 }
               case 'clear': {
-                  await Message.deleteMany({});
+                  const name = payload;
+                  await Message.deleteMany({'name': name});
                   broadcastMessage(['cleared'],{
                       type: 'info',
                       msg: 'Message cache cleared.'

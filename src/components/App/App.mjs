@@ -7,9 +7,6 @@ import { createBrowserRouter,
          RouterProvider
 } from 'react-router-dom';
 
-// <MessageOutlined />
-// <SettingOutlined />
-// <SearchOutlined />
 
 const router = createBrowserRouter([
   {

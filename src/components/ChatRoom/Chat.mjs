@@ -1,18 +1,38 @@
-import './Chat.css';
-import {ConfigProvider, Button, Input, message, theme, FloatButton} from 'antd';
+import styled from 'styled-components';
+import {ConfigProvider, Input, message, theme, FloatButton} from 'antd';
 import { VerticalAlignBottomOutlined } from '@ant-design/icons';
 import {useState, useEffect, useRef} from 'react';
 import useChat from './useChat.mjs';
 import User from './User.mjs';
 import Bot from './Bot.mjs';
+import Header from './Header.mjs';
 
-
+const Page = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    width: 75%;
+    max-width: 500px;
+    margin: auto;
+    padding: 40px;
+`;
+const Messages = styled.div`
+    width: 100%;
+    height: 65%;
+    color:aliceblue;
+    background: #666666;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;
+    overflow: scroll;
+`;
 
 
 function App() {
     const { darkAlgorithm } = theme;
     const { status, messages, sendMessage, clearMessages, username } = useChat();
-    // const username = newUser();
     const [body, setBody] = useState('');
     const [visible, setVisible] = useState(true);
     const Body = useRef(null);
@@ -48,15 +68,9 @@ function App() {
 
   return (
     <ConfigProvider theme={{ algorithm: darkAlgorithm}}>
-      
-    <div className="App">
-      <div className="App-title">
-        <h1>ChatBot</h1>
-        <Button type="primary" danger onClick={clearMessages}>
-          Clear
-        </Button>
-      </div>
-      <div className="App-messages" onScroll={handleScroll} ref={Body}>
+    <Page>
+      <Header clearMessages={clearMessages}/>
+      <Messages onScroll={handleScroll} ref={Body}>
         {messages.length === 0 ? (
           <p style={{ color: '#ccc' }}> No messages... </p>
         ) : (
@@ -66,7 +80,7 @@ function App() {
             (<User body={body} key={i}/>))
         )
         }
-      </div>
+      </Messages>
       <Input.Search
         value={body}
         onChange={(e) => setBody(e.target.value)}
@@ -83,10 +97,8 @@ function App() {
         setBody('');
         }}
       />
-
       <FloatButton
             shape="circle"
-            // type="primary"
             icon={<VerticalAlignBottomOutlined/>}
             style={{
                     position: 'relative',
@@ -96,7 +108,7 @@ function App() {
             onClick={()=>{Body.current.scrollTo({ top: Body.current.scrollHeight, behavior: 'smooth' });
                           console.log(username);}} 
       />
-    </div>
+    </Page>
     </ConfigProvider>
   )
 }
