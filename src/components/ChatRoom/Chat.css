@@ -3,10 +3,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    width: 90%;
+    height: 90vh;
+    width: 75%;
     max-width: 500px;
     margin: auto;
+    padding: 40px;
   }
   
   .App-title {
@@ -33,7 +34,7 @@
     overflow: scroll;
   }
   
-  .App-message{
+  /* .App-message{
     background: #888888;
     border-radius: 5px;
     margin: 10px;
@@ -48,5 +49,4 @@
     margin: 5px;
     padding: 5px;
     font-size: 18px;
-    /* margin-left: 50px; */
-  }
+  } */

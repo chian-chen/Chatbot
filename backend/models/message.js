@@ -8,6 +8,11 @@ const MessageSchema = new Schema({
     required: [true, 'Name field is required.'],
     default: 'user'
   },
+  bot: {
+    type: Boolean,
+    required: [true, 'bot field is required'],
+    default: false
+  },
   body: {
     type: mongoose.Mixed,
     required: [true, 'Body field is required.']
