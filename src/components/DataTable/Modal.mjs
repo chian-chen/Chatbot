@@ -10,11 +10,11 @@ const App = ({ isModalVisible, setIsModalVisible, saveData })=> {
 
     return (
         <Modal
-          style={{ Width: '100%', maxWidth: '1200px' }}
           title="Create a new data"
           open={isModalVisible}
           onCancel={handleCancel}
           footer={null} 
+          width={600}
           >
           <MyForm saveData={saveData} setIsModalVisible={setIsModalVisible}/>
         </Modal>
@@ -24,7 +24,7 @@ const App = ({ isModalVisible, setIsModalVisible, saveData })=> {
 
 const MyForm = ({saveData, setIsModalVisible}) => {
   const [form] = Form.useForm();
-  const datas = ['prompt', 'key', 'class', 'mes1', 'mes2', 'mes3', 'mes4', 'act1', 'act2', 'act3', 'act4'];
+  const datas = ['prompt', 'class', 'mes1', 'mes2', 'mes3', 'mes4', 'act1', 'act2', 'act3', 'act4'];
   const formLayout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
   const onFinish = (values) => {

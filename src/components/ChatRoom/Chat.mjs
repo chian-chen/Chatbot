@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {ConfigProvider, Input, message, theme, FloatButton} from 'antd';
+import { Input, message, FloatButton} from 'antd';
 import { VerticalAlignBottomOutlined } from '@ant-design/icons';
 import {useState, useEffect, useRef} from 'react';
 import useChat from './useChat.mjs';
@@ -14,24 +14,26 @@ const Page = styled.div`
     justify-content: center;
     height: 90vh;
     width: 75%;
-    max-width: 500px;
-    margin: auto;
-    padding: 40px;
+    max-width: 600px;
+    margin: 10px auto;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #ffffff99;
+    box-shadow: 0px 0px 16px rgb(199, 197, 197);
 `;
 const Messages = styled.div`
     width: 100%;
     height: 65%;
     color:aliceblue;
-    background: #666666;
+    background-color: #aaaaaa99;
     border-radius: 10px;
     margin: 20px;
-    padding: 20px;
+    padding: 10px;
     overflow: scroll;
 `;
 
 
 function App() {
-    const { darkAlgorithm } = theme;
     const { status, messages, sendMessage, clearMessages, username } = useChat();
     const [body, setBody] = useState('');
     const [visible, setVisible] = useState(true);
@@ -67,7 +69,6 @@ function App() {
     }
 
   return (
-    <ConfigProvider theme={{ algorithm: darkAlgorithm}}>
     <Page>
       <Header clearMessages={clearMessages}/>
       <Messages onScroll={handleScroll} ref={Body}>
@@ -109,7 +110,6 @@ function App() {
                           console.log(username);}} 
       />
     </Page>
-    </ConfigProvider>
   )
 }
 

@@ -1,10 +1,10 @@
-import {Row, Col, Button, Avatar} from 'antd';
+import {Row, Col, Button, Avatar, Image} from 'antd';
 import React from 'react';
 import styled from 'styled-components';
 
 
 const Mes = styled.p`
-    background: #888888;
+    background: #88888866;
     border-radius: 5px;
     margin: 10px;
     padding: 10px;
@@ -14,7 +14,7 @@ const Mes = styled.p`
 `;
 
 const Act = styled.p`
-    background: #888888;
+    background: #88888866;
     border-radius: 5px;
     margin: 5px;
     padding: 5px;
@@ -24,7 +24,7 @@ const Act = styled.p`
 const Bot = ({body, sendMessage, username})=>{
     return Array.isArray(body)? 
     (
-        <Row style={{background: '#999999', borderRadius: '5px', }}>
+        <Row style={{background: '#99999966', borderRadius: '5px', }}>
             <Col align="center" span={24} >
                 <Act>Choose one to reply</Act>
             </Col>
@@ -50,7 +50,11 @@ const Bot = ({body, sendMessage, username})=>{
               <Col align="left" span={22}>
                 {(body.startsWith('https') && (body.endsWith('.jpg') || body.endsWith('.png')))? 
                 (
-                    <img src={body} alt="img" width="50%" style={{margin: '5px', padding: '5px'}}/>
+                    <Image
+                            width={'50%'}
+                            src={body}
+                            style={{padding: '10px'}}
+                    />
                 )
                 :
                 (

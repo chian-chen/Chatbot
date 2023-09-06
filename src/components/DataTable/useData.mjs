@@ -12,6 +12,8 @@ client.onopen = () => {
 const useData = () => {
     const [tableDatas, setTableDatas] = useState([]);
     const [status, setStatus] = useState({});
+    const saveLogin = localStorage.getItem("Is-a-Login-User");
+    const [isLogin, setIsLogin] = useState(saveLogin || false);
 
 
     client.onmessage = (byteString) => {
@@ -29,6 +31,12 @@ const useData = () => {
         }
           case "Update-Status": {
             setStatus(payload);
+            break;
+          }
+          case "Login":{
+            setIsLogin(payload);
+            if(payload)
+              localStorage.setItem("Is-a-Login-User", true);
             break;
           }
           default: break;
@@ -57,13 +65,19 @@ const useData = () => {
         sendToBackend(["Delete-Data", data]);
     };
 
+    const Login = (data)=>{
+        sendToBackend(["Login", data]);
+    }
+
     return {
         status,
         tableDatas,
         saveData,
         saveMany,
         deleteData,
-        deleteMany };
+        deleteMany,
+        isLogin,
+        Login };
 }
 
 export default useData;

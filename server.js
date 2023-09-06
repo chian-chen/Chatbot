@@ -53,10 +53,8 @@ const broadcast = (status) => {
 };
 
 const broadcastMessage = (data, status, client) => {
-  // wss.clients.forEach((client) => {
     sendData(data, client);
     sendStatus(status, client);
-  // });
 };
 
 db.once('open', () => {
@@ -106,6 +104,23 @@ db.once('open', () => {
                     type: 'success',
                     msg: `Delete ${payload.length} datas!"`
                   });
+                  break;
+              }
+              case 'Login':{
+                  if(payload === 'Aaa0227931917!'){
+                      sendData(['Login', true], ws);
+                      sendData(['Update-Status', {
+                        type: 'success',
+                        msg: 'Login succeed!'
+                      }], ws);
+                  }
+                  else{
+                      sendData(['Login', false], ws);
+                      sendData(['Update-Status', {
+                        type: 'error',
+                        msg: 'Wrong Password!'
+                      }], ws);
+                  }
                   break;
               }
               case 'input': {

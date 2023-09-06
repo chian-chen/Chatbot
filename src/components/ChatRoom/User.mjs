@@ -3,13 +3,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Mes = styled.p`
-    /* background-image: linear-gradient(to bottom right, #05374d, #178a4f); */
-    background: #05374d;
+    background: #05374d99;
     border-radius: 5px;
     margin: 10px;
     padding: 10px;
     width: max-content;
-    font-size: 18px;
+    /* font-size: 18px; */
 `;
 
 const User = ({body})=>{

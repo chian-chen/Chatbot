@@ -1,6 +1,6 @@
 import { UploadOutlined } from '@ant-design/icons';
 import React, {useState, useRef} from 'react';
-import { Button, Space, Upload, message } from 'antd';
+import { Button, Row, Col, Upload, message } from 'antd';
 import * as XLSX from 'xlsx';
 
 
@@ -62,8 +62,8 @@ const App = ({saveMany}) => {
     };
 
     return (
-        <>
-    <Space style={{width: '100%', justifyContent: 'right'}}>
+        <Row>
+    <Col align="right" span={24} style={{marginBottom: '5px'}}>
         <Upload
             ref={uploadRef}
             name="file"
@@ -77,13 +77,13 @@ const App = ({saveMany}) => {
         >
             <Button icon={<UploadOutlined />}>Click to Choose a file</Button>
         </Upload>
-    </Space>
-    <Space style={{width: '100%', justifyContent: 'right'}}>
+    </Col>
+    <Col align="right" span={24}>
         <Button onClick={saveFile}
                 disabled={fileLists.length === 0}
                 loading={uploading}>{uploading ? 'Uploading' : 'Start Upload'}</Button>
-    </Space>
-        </>
+    </Col>
+        </Row>
 
 );
 };

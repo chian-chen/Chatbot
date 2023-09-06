@@ -14,7 +14,7 @@ const Head = styled.h1`
     margin: 0;
     margin-right: 20px;
     font-size: 3em;
-    color:aliceblue;
+    color: #999999;
 `;
 
 const Header = ({clearMessages})=>{
