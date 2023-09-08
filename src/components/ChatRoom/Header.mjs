@@ -21,17 +21,17 @@ const Header = ({clearMessages})=>{
     return (
        <Title>
             <Head>
-                ChatBot
+                未聞其名
             </Head>
             <Popconfirm
-                title="Clear all messages"
-                description="The action can not be undone"
+                title="清除所有訊息"
+                description="此動作無法回復"
                 onConfirm={clearMessages}
                 okText="Yes"
                 cancelText="No"
             >
                 <Button type="primary" danger>
-                    Clear
+                    清除對話
                 </Button>
             </Popconfirm>
        </Title>

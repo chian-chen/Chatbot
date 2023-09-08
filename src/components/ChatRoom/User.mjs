@@ -8,7 +8,7 @@ const Mes = styled.p`
     margin: 10px;
     padding: 10px;
     width: max-content;
-    /* font-size: 18px; */
+    font-size: 18px;
 `;
 
 const User = ({body})=>{

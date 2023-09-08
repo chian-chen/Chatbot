@@ -4,7 +4,8 @@ import styled from 'styled-components';
 
 
 const Mes = styled.p`
-    background: #88888866;
+    background: #88888833;
+    color: #05374d;
     border-radius: 5px;
     margin: 10px;
     padding: 10px;
@@ -14,7 +15,8 @@ const Mes = styled.p`
 `;
 
 const Act = styled.p`
-    background: #88888866;
+    background: #88888833;
+    color: #05374d;
     border-radius: 5px;
     margin: 5px;
     padding: 5px;
@@ -26,7 +28,7 @@ const Bot = ({body, sendMessage, username})=>{
     (
         <Row style={{background: '#99999966', borderRadius: '5px', }}>
             <Col align="center" span={24} >
-                <Act>Choose one to reply</Act>
+                <Act>你想怎麼回呢？</Act>
             </Col>
             {
               body.map( (act)=>(

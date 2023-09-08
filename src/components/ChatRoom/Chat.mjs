@@ -25,7 +25,7 @@ const Messages = styled.div`
     width: 100%;
     height: 65%;
     color:aliceblue;
-    background-color: #aaaaaa99;
+    /* background-color: #aaaaaa99; */
     border-radius: 10px;
     margin: 20px;
     padding: 10px;
@@ -44,7 +44,7 @@ function App() {
     if (payload.msg) {
       const { type, msg } = payload;
       const content = {
-        content: msg, duration: 0.5 }
+        content: msg, duration: 1 }
       switch (type) {
         case 'success':
           message.success(content);
@@ -85,13 +85,13 @@ function App() {
       <Input.Search
         value={body}
         onChange={(e) => setBody(e.target.value)}
-        enterButton="Send"
-        placeholder="Type a message here..."
+        enterButton="傳送"
+        placeholder="在這裡和我說話..."
         onSearch={(msg) => {
         if (!msg || !username) {
             displayStatus({
                 type: 'error',
-                msg: 'Please enter a message body.'
+                msg: '訊息欄空白，請輸入訊息！'
              });
         return; }
         sendMessage({ 'name': username, 'body': msg });

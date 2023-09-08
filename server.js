@@ -99,7 +99,10 @@ db.once('open', () => {
               }
               case 'Delete-Many': {
                   for(let i = 0; i < payload.length; i++)
-                      await Template.deleteOne({prompt: payload[i]}).catch((e)=>console.log(e));
+                      await Template.deleteOne({prompt: payload[i]}).catch((e)=>broadcast({
+                        type: 'error',
+                        msg: e
+                      }));
                   broadcast({
                     type: 'success',
                     msg: `Delete ${payload.length} datas!"`
@@ -107,7 +110,7 @@ db.once('open', () => {
                   break;
               }
               case 'Login':{
-                  if(payload === 'Aaa0227931917!'){
+                  if(payload === process.env.PASSWORD){
                       sendData(['Login', true], ws);
                       sendData(['Update-Status', {
                         type: 'success',
@@ -130,7 +133,7 @@ db.once('open', () => {
                     const datas = await Template.find({prompt: body});
                     
                     if(datas === undefined || datas === [] || typeof datas[0] !== 'object'){
-                        const response = new Message({ 'name': name, 'bot': true, 'body': 'prompt not exist' });
+                        const response = new Message({ 'name': name, 'bot': true, 'body': '不要問我我不會的問題啦～' });
                         await response.save().catch((e)=>Error("Message DB save error: " + e));
                     }
                     else{
@@ -152,7 +155,7 @@ db.once('open', () => {
                         catch(e=>console.log(e));
                     broadcastMessage(['output', messages],{
                         type: 'success',
-                        msg: 'Message sent.'
+                        msg: '訊息傳送成功！'
                     }, ws);
                     break;
                 }
@@ -161,7 +164,7 @@ db.once('open', () => {
                   await Message.deleteMany({'name': name});
                   broadcastMessage(['cleared'],{
                       type: 'info',
-                      msg: 'Message cache cleared.'
+                      msg: '已刪除聊天室訊息！'
                   }, ws);
                   break;
                }
