@@ -42,6 +42,10 @@ const useChat = () => {
         setMessages([]);
         break;
     }
+    case "pong":{
+        console.log('pong');
+        break;
+    }
       default: break;
     }
   };

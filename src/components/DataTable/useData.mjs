@@ -9,7 +9,6 @@ const client = new WebSocket(url.href.replace("http", "ws"));
 
 client.onopen = ()=>{
   setInterval(()=>{client.send(JSON.stringify(['ping', true]));
-                   console.log('ping');
   }, 10000);
 };
 
