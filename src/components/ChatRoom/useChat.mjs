@@ -3,7 +3,7 @@ import { useState } from "react";
 
 
 const url = new URL(window.location.href);
-const client = new WebSocket(url.replace('http', 'ws'));
+const client = new WebSocket(url.href.replace("http", "ws"));
 // const client = new WebSocket('ws://localhost:4500');
 
 client.onopen = ()=>{
