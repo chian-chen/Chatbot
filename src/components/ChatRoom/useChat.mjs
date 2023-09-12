@@ -1,28 +1,33 @@
 import { useState } from "react";
 
+const reConnection = ()=>{
+  let client = new WebSocket(url.href.replace("http", "ws"));
+  //const client = new WebSocket('ws://localhost:4500');
+
+  client.onopen = () => {
+    console.log('open connection!');
+  };
+  
+  client.onclose = () =>{
+    console.log('connection close qq!');
+    setTimeout(()=>{
+      client = reConnection();
+    }, 1000);
+  };
+  
+  client.onerror = (err)=> {
+    console.log('connection error qq!');
+    if (err.code === 'ECONNREFUSED') {
+      client = reConnection();
+    }
+  };
+
+  return client;
+};
+
 const url = new URL(window.location.href);
-let client = new WebSocket(url.href.replace("http", "ws"));
+let client = reConnection();
 // let client = new WebSocket('ws://localhost:4500');
-
-client.onopen = () => {
-  console.log('open connection!');
-};
-
-client.onclose = () =>{
-  console.log('connection close qq!');
-  setTimeout(()=>{
-    client = new WebSocket(url.href.replace("http", "ws"));
-    // client = new WebSocket('ws://localhost:4500');
-  }, 1000);
-};
-
-client.onerror = (err)=> {
-  console.log('connection error qq!');
-  if (err.code === 'ECONNREFUSED') {
-    client = new WebSocket(url.href.replace("http", "ws"));
-    // client = new WebSocket('ws://localhost:4500');
-  }
-};
 
 const useChat = () => {
   const [messages, setMessages] = useState([]);
