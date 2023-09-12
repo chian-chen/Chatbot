@@ -11,7 +11,6 @@ client.onopen = () => {
 client.onclose = () =>{
   console.log('connection close qq!');
   setTimeout(()=>{
-    client.removeAllListeners();
     client = new WebSocket(url.href.replace("http", "ws"));
     // client = new WebSocket('ws://localhost:4500');
   }, 1000);
@@ -20,11 +19,9 @@ client.onclose = () =>{
 client.onerror = (err)=> {
   console.log('connection error qq!');
   if (err.code === 'ECONNREFUSED') {
-    client.removeAllListeners();
     client = new WebSocket(url.href.replace("http", "ws"));
     // client = new WebSocket('ws://localhost:4500');
   }
-  client.terminate();
 };
 
 const useChat = () => {
