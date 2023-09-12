@@ -9,11 +9,23 @@ let client = new WebSocket(url.href.replace("http", "ws"));
 client.onopen = () => {
   console.log('open connection!');
 };
+
 client.onclose = () =>{
   console.log('connection close qq!');
   setTimeout(()=>{
+    client.removeAllListeners();
     client = new WebSocket(url.href.replace("http", "ws"));
+    // client = new WebSocket('ws://localhost:4500');
   }, 1000);
+};
+
+client.onerror = (err)=> {
+  if (err.code === 'ECONNREFUSED') {
+    client.removeAllListeners();
+    client = new WebSocket(url.href.replace("http", "ws"));
+    // client = new WebSocket('ws://localhost:4500');
+  }
+  client.terminate();
 };
 
 const useData = () => {
