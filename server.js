@@ -178,6 +178,9 @@ db.once('open', () => {
                   }, ws);
                   break;
                }
+              case 'ping':{
+                  sendData(['pong', true], ws);
+               }
               default: break;
           };
       };

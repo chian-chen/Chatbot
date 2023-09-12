@@ -2,35 +2,16 @@ import { useState } from "react";
 import * as FileSaver from "file-saver";
 import * as XLSX from "xlsx";
 
-const reConnection = ()=>{
-  let client = new WebSocket(url.href.replace("http", "ws"));
-  //const client = new WebSocket('ws://localhost:4500');
-
-  client.onopen = () => {
-    console.log('open connection!');
-  };
-  
-  client.onclose = () =>{
-    console.log('connection close qq!');
-    setTimeout(()=>{
-      client = reConnection();
-    }, 1000);
-  };
-  
-  client.onerror = (err)=> {
-    console.log('connection error qq!');
-    if (err.code === 'ECONNREFUSED') {
-      client = reConnection();
-    }
-  };
-
-  return client;
-};
 
 const url = new URL(window.location.href);
-let client = reConnection();
-// let client = new WebSocket('ws://localhost:4500');
+const client = new WebSocket(url.replace('http', 'ws'));
+// const client = new WebSocket('ws://localhost:4500');
 
+client.onopen = ()=>{
+  setInterval(()=>{client.send(JSON.stringify(['ping', true]));
+                   console.log('ping');
+  }, 10000);
+};
 
 
 const useData = () => {
@@ -65,7 +46,7 @@ const useData = () => {
           }
           default: break;
         }
-      }
+      };
     
     const sendToBackend = (data) => {
         console.log(client.CLOSED)
