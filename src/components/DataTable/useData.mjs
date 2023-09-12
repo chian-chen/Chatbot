@@ -20,6 +20,7 @@ client.onclose = () =>{
 };
 
 client.onerror = (err)=> {
+  console.log('connection error qq!');
   if (err.code === 'ECONNREFUSED') {
     client.removeAllListeners();
     client = new WebSocket(url.href.replace("http", "ws"));
