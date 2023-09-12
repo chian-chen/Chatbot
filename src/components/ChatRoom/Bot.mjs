@@ -1,7 +1,7 @@
 import {Row, Col, Button, Avatar, Image} from 'antd';
 import React from 'react';
 import styled from 'styled-components';
-
+import { LoadingOutlined } from '@ant-design/icons';
 
 const Mes = styled.p`
     background: #88888833;
@@ -11,7 +11,7 @@ const Mes = styled.p`
     padding: 10px;
     width: max-content;
     max-width: 70%;
-    font-size: 18px;
+    /* font-size: 18px; */
 `;
 
 const Act = styled.p`
@@ -20,8 +20,10 @@ const Act = styled.p`
     border-radius: 5px;
     margin: 5px;
     padding: 5px;
-    font-size: 18px;
+    /* font-size: 18px; */
 `;
+
+
 
 const Bot = ({body, sendMessage, username})=>{
     return Array.isArray(body)? 
@@ -60,7 +62,7 @@ const Bot = ({body, sendMessage, username})=>{
                 )
                 :
                 (
-                    <Mes dangerouslySetInnerHTML={ {__html: body} }/>
+                    (body === 'Loading...')? (<Mes><LoadingOutlined/></Mes>) : (<Mes dangerouslySetInnerHTML={ {__html: body} }/>)
                 )}
                 
               </Col>

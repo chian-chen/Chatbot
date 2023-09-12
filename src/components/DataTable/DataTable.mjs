@@ -12,7 +12,7 @@ const App = ()=>{
     const [password, setPassword] = useState('');
 
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-    const {status, tableDatas, saveData, saveMany, deleteData, deleteMany, isLogin, Login} = useData();
+    const {status, tableDatas, saveData, saveMany, deleteData, deleteMany, isLogin, Login, deleteAll, saveAll} = useData();
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [filteredInfo, setFilteredInfo] = useState({});
     const [tableParams, setTableParams] = useState({pagination: {current: 1, pageSize: 10}});
@@ -223,7 +223,7 @@ const App = ()=>{
           pagination={tableParams.pagination}
           onChange={handleTableChange}
           />
-          <Upload saveMany = {saveMany}/>
+          <Upload saveMany = {saveMany} saveAll={saveAll} deleteAll={deleteAll}/>
           <Modal isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} saveData={saveData}/>
         </Page>
         )
@@ -249,7 +249,6 @@ const App = ()=>{
                     >Enter</Button>
                 </Col>
             </Row>
-        
         </Page>
         )
       );

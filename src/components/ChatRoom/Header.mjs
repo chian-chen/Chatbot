@@ -1,7 +1,7 @@
 import {Button, Popconfirm} from 'antd';
 import React from 'react';
 import styled from 'styled-components';
-
+import { DeleteOutlined } from '@ant-design/icons';
 
 
 const Title = styled.div`
@@ -30,9 +30,7 @@ const Header = ({clearMessages})=>{
                 okText="Yes"
                 cancelText="No"
             >
-                <Button type="primary" danger>
-                    清除對話
-                </Button>
+                <Button type="primary" danger icon={<DeleteOutlined/>}/>
             </Popconfirm>
        </Title>
     );

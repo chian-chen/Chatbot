@@ -1,10 +1,10 @@
-import { UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined, DownloadOutlined, DeleteOutlined } from '@ant-design/icons';
 import React, {useState, useRef} from 'react';
-import { Button, Row, Col, Upload, message } from 'antd';
+import { Button, Row, Col, Upload, message, Popconfirm } from 'antd';
 import * as XLSX from 'xlsx';
 
 
-const App = ({saveMany}) => {
+const App = ({saveMany, deleteAll, saveAll}) => {
     const [files, setFiles] = useState([]);
     const [fileLists, setFileLists] = useState([]);
     const [uploading, setUploading] = useState(false);
@@ -63,26 +63,43 @@ const App = ({saveMany}) => {
 
     return (
         <Row>
-    <Col align="right" span={24} style={{marginBottom: '5px'}}>
-        <Upload
-            ref={uploadRef}
-            name="file"
-            showUploadList={{ showRemoveIcon: true }}
-            accept=".xls, .xlsx"
-            beforeUpload={file => readFile(file)}
-            multiple={false}
-            fileList={fileLists}
-            onChange={e => handleChange(e)}
-            onRemove={e => fileRemoved(e)}
-        >
-            <Button icon={<UploadOutlined />}>Click to Choose a file</Button>
-        </Upload>
-    </Col>
-    <Col align="right" span={24}>
-        <Button onClick={saveFile}
-                disabled={fileLists.length === 0}
-                loading={uploading}>{uploading ? 'Uploading' : 'Start Upload'}</Button>
-    </Col>
+            <Col align="left" span={12} style={{marginBottom: '5px'}} >
+                <Button icon={<DownloadOutlined />} type={'primary'}
+                        onClick={saveAll}> Download All
+                </Button>
+            </Col>
+            <Col align="right" span={12} style={{marginBottom: '5px'}}>
+                <Upload
+                    ref={uploadRef}
+                    name="file"
+                    showUploadList={{ showRemoveIcon: true }}
+                    accept=".xls, .xlsx"
+                    beforeUpload={file => readFile(file)}
+                    multiple={false}
+                    fileList={fileLists}
+                    onChange={e => handleChange(e)}
+                    onRemove={e => fileRemoved(e)}
+                >
+                    <Button icon={<UploadOutlined />}>Click to Choose a file</Button>
+                </Upload>
+            </Col>
+            <Col align="left" span={12} style={{marginBottom: '5px'}}>
+                <Popconfirm
+                    title="Clear all data?"
+                    description="The action can not be undone!"
+                    onConfirm={deleteAll}
+                    okText="Yes"
+                    cancelText="No"
+                >
+                <Button icon={<DeleteOutlined />} danger> Delete All </Button>
+                </Popconfirm>
+            </Col>
+            <Col align="right" span={12}>
+                <Button onClick={saveFile}
+                        disabled={fileLists.length === 0}
+                        loading={uploading}>{uploading ? 'Uploading' : 'Start Upload'}
+                </Button>
+            </Col>
         </Row>
 
 );

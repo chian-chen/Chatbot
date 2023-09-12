@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Input, message, FloatButton} from 'antd';
-import { VerticalAlignBottomOutlined } from '@ant-design/icons';
+import { VerticalAlignBottomOutlined} from '@ant-design/icons';
 import {useState, useEffect, useRef} from 'react';
 import useChat from './useChat.mjs';
 import User from './User.mjs';
@@ -57,8 +57,11 @@ function App() {
 
     useEffect(() => {
       displayStatus(status);
-      Body.current.scrollTo({ top: Body.current.scrollHeight, behavior: 'smooth' });
     }, [status]);
+
+    useEffect(() => {
+      Body.current.scrollTo({ top: Body.current.scrollHeight, behavior: 'smooth' });
+    }, [messages]);
 
     const handleScroll = (e) => {
       const bottom = (e.target.scrollHeight - e.target.scrollTop) - e.target.clientHeight;
@@ -93,7 +96,8 @@ function App() {
                 type: 'error',
                 msg: '訊息欄空白，請輸入訊息！'
              });
-        return; }
+            return; 
+        }
         sendMessage({ 'name': username, 'body': msg });
         setBody('');
         }}
@@ -104,10 +108,9 @@ function App() {
             style={{
                     position: 'relative',
                     right: '0',
-                    opacity: visible? '0.5': '0'
+                    opacity: visible? '0.5': '0',
             }}      
-            onClick={()=>{Body.current.scrollTo({ top: Body.current.scrollHeight, behavior: 'smooth' });
-                          console.log(username);}} 
+            onClick={()=>Body.current.scrollTo({ top: Body.current.scrollHeight, behavior: 'smooth' })} 
       />
     </Page>
   )

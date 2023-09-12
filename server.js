@@ -68,6 +68,7 @@ db.once('open', () => {
           switch(task) {
               case 'Save-Data': {
                   const {prompt, key, cls, mes1, mes2, mes3, mes4, act1, act2, act3, act4} = payload;
+                  await Template.findOneAndDelete({'prompt': prompt});
                   const template = new Template({ prompt, key, cls, mes1, mes2, mes3, mes4, act1, act2, act3, act4 });
                   await template.save().catch((e)=> console.log(e));
                   broadcast({
@@ -80,6 +81,7 @@ db.once('open', () => {
                   const {name, datas} = payload;
                   for(let i = 0; i < datas.length; i++){
                     const {prompt, key, cls, mes1, mes2, mes3, mes4, act1, act2, act3, act4} = datas[i];
+                    await Template.findOneAndDelete({'prompt': prompt});
                     const template = new Template({ prompt, key, cls, mes1, mes2, mes3, mes4, act1, act2, act3, act4 });
                     await template.save().catch((e)=> console.log(e));
                   }
@@ -106,6 +108,14 @@ db.once('open', () => {
                   broadcast({
                     type: 'success',
                     msg: `Delete ${payload.length} datas!"`
+                  });
+                  break;
+              }
+              case 'Delete-All':{
+                  await Template.deleteMany({}).catch((e)=>console.log(e));
+                  broadcast({
+                    type: 'success',
+                    msg: `Delete all data!"`
                   });
                   break;
               }
@@ -172,7 +182,8 @@ db.once('open', () => {
           };
       };
   });
+
   server.listen(port, () => {
     console.log(`Listening on http://localhost:${port}`)
-});
+  });
 });

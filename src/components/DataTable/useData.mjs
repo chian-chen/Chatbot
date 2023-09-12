@@ -1,13 +1,20 @@
 import { useState } from "react";
+import * as FileSaver from "file-saver";
+import * as XLSX from "xlsx";
 
 const url = new URL(window.location.href);
-const client = new WebSocket(url.href.replace("http", "ws"));
-// const client = new WebSocket('ws://localhost:4500');
+let client = new WebSocket(url.href.replace("http", "ws"));
+// let client = new WebSocket('ws://localhost:4500');
 
 client.onopen = () => {
-  console.log('open connection');
-}
-
+  console.log('open connection!');
+};
+client.onclose = () =>{
+  console.log('connection close qq!');
+  setTimeout(()=>{
+    client = new WebSocket(url.href.replace("http", "ws"));
+  }, 1000);
+};
 
 const useData = () => {
     const [tableDatas, setTableDatas] = useState([]);
@@ -67,7 +74,21 @@ const useData = () => {
 
     const Login = (data)=>{
         sendToBackend(["Login", data]);
-    }
+    };
+
+    const saveAll = ()=>{
+          const ws = XLSX.utils.json_to_sheet(tableDatas);
+          const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
+          const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+          const data = new Blob([excelBuffer], { type: "xlsx"});
+          const timeElapsed = Date.now();
+          const today = new Date(timeElapsed);
+          FileSaver.saveAs(data, `datas_${today.toLocaleDateString()}.xlsx`);
+    };
+
+    const deleteAll = ()=>{
+        sendToBackend(["Delete-All", '']);
+    };
 
     return {
         status,
@@ -77,7 +98,9 @@ const useData = () => {
         deleteData,
         deleteMany,
         isLogin,
-        Login };
+        Login,
+        saveAll,
+        deleteAll };
 }
 
 export default useData;

@@ -1,12 +1,20 @@
 import { useState } from "react";
 
 const url = new URL(window.location.href);
-const client = new WebSocket(url.href.replace("http", "ws"));
-// const client = new WebSocket('ws://localhost:4500');
+let client = new WebSocket(url.href.replace("http", "ws"));
+// let client = new WebSocket('ws://localhost:4500');
 
 client.onopen = () => {
-  console.log('open connection');
+  console.log('open connection!');
 };
+client.onclose = () =>{
+  console.log('connection close qq!');
+  setTimeout(()=>{
+    client = new WebSocket(url.href.replace("http", "ws"));
+  }, 1000);
+};
+
+
 
 const useChat = () => {
   const [messages, setMessages] = useState([]);
@@ -49,7 +57,12 @@ const useChat = () => {
   };
 
   const sendMessage = (payload) => {
-    sendData(["input", payload]);
+    setMessages([...messages, {'user': '', 'bot': true, 'body': 'Loading...'}]);
+    const timer = setTimeout(() => {
+      sendData(["input", payload]);
+    }, 1000);
+
+    return () => clearTimeout(timer);
   };
 
   const clearMessages = () => {
